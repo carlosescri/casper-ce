@@ -2,7 +2,7 @@
     <div class="site-footer-content">
         <section class="copyright"><a href="{{@blog.url}}">{{@blog.title}}</a> &copy; {{date format="YYYY"}}</section>
         <nav class="site-footer-nav">
-            {{#get "posts" limit="all" filter="page:true+tags:hash-footer-link"}}
+            {{#get "posts" limit="all" filter="page:true+tags:hash-footer-link" order="published_at asc"}}
               {{#foreach posts}}
                 <a href="{{url}}">{{title}}</a>
               {{/foreach}}
