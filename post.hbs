@@ -51,7 +51,9 @@
 
             <section class="post-full-comments">
                 <script>
-                    var disqus_url = '{{url absolute="true"}}';
+                    if (typeof disqus_url === 'undefined') {
+                        var disqus_url = '{{url absolute="true"}}';
+                    }
                 </script>
                 <div id="disqus_thread">
                   <a href="#"></a>

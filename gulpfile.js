@@ -63,7 +63,8 @@ gulp.task('zip', ['css'], function () {
         '!yarn.lock', '!package-lock.json',
         '!travis.yml', '!.editorconfig',
         '!.git', '!.git/**', '!.gitignore',
-        '!.github', '!.github/**'
+        '!.github', '!.github/**',
+        '!redirects.json'
     ])
         .pipe(zip(filename))
         .pipe(gulp.dest(targetDir));
