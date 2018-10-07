@@ -1,17 +1,17 @@
 <nav class="site-nav">
-    <div class="site-nav-left">
-        {{^is "home"}}
-            {{#if @blog.logo}}
-                <a class="site-nav-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
-            {{else}}
-                <a class="site-nav-logo" href="{{@blog.url}}">{{@blog.title}}</a>
-            {{/if}}
-        {{/is}}
+    <div class="site-nav-brand">
+        {{#if @blog.logo}}
+            <a class="site-nav-logo" href="{{@blog.url}}"><img src="{{@blog.logo}}" alt="{{@blog.title}}" /></a>
+        {{else}}
+            <a class="site-nav-logo" href="{{@blog.url}}">{{@blog.title}}</a>
+        {{/if}}
+    </div>
+    <div class="site-nav-menu">
         {{#if @blog.navigation}}
             {{navigation}}
         {{/if}}
     </div>
-    <div class="site-nav-right">
+    <div class="site-nav-extra">
         <div class="social-links">
             {{#if @blog.facebook}}
                 <a class="social-link social-link-fb" href="{{facebook_url @blog.facebook}}" target="_blank" rel="noopener">{{> "icons/facebook"}}</a>
@@ -21,7 +21,7 @@
             {{/if}}
         </div>
         {{#if @labs.subscribers}}
-            <a class="subscribe-button" href="#subscribe">Subscribe</a>
+            <a class="subscribe-button" href="#subscribe">{{t "Subscribe"}}</a>
         {{else}}
             <a class="rss-button" href="https://feedly.com/i/subscription/feed/{{@blog.url}}/rss/" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
         {{/if}}
