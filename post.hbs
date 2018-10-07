@@ -1,14 +1,5 @@
 {{!< default}}
 
-{{!-- The tag above means: insert everything in this file
-into the {body} of the default.hbs template --}}
-
-<header class="site-header outer">
-    <div class="inner">
-        {{> "site-nav"}}
-    </div>
-</header>
-
 {{!-- Everything inside the #post tags pulls data from the post --}}
 {{#post}}
 
@@ -41,9 +32,9 @@ into the {body} of the default.hbs template --}}
             {{!-- Email subscribe form at the bottom of the page --}}
             {{#if @labs.subscribers}}
             <section class="subscribe-form">
-                <h3 class="subscribe-form-title">Subscribe to {{@blog.title}}</h3>
-                <p>Get the latest posts delivered right to your inbox</p>
-                {{subscribe_form placeholder="youremail@example.com"}}
+                <h3 class="subscribe-form-title">{{t "Subscribe"}}</h3>
+                <p>{{t "Get the latest posts delivered right to your inbox"}}</p>
+                {{subscribe_form placeholder=(t "youremail@example.com")}}
             </section>
             {{/if}}
 
@@ -54,19 +45,18 @@ into the {body} of the default.hbs template --}}
                 from includes/byline-multiple.hbs, otherwise, we just use the
                 default byline. --}}
 
-                {{#has author="count:>1"}}
-                    {{> "byline-multiple"}}
-                {{else}}
-                    {{> "byline-single"}}
-                {{/has}}
+                {{> "byline-single"}}
 
             </footer>
 
-            {{!--
             <section class="post-full-comments">
-                If you want to embed comments, this is a good place to do it!
+                <script>
+                    var disqus_url = '{{url absolute="true"}}';
+                </script>
+                <div id="disqus_thread">
+                  <a href="#"></a>
+                </div>
             </section>
-            --}}
 
         </article>
 
@@ -85,7 +75,8 @@ into the {body} of the default.hbs template --}}
                         style="background-image: url({{../primary_tag.feature_image}})"
                     {{else}}
                         {{#if @blog.cover_image}}
-                            style="background-image: url({{@blog.cover_image}})"{{/if}}
+                            style="background-image: url({{@blog.cover_image}})"
+                        {{/if}}
                     {{/if}}
                 >
                     <header class="read-next-card-header">
@@ -102,9 +93,11 @@ into the {body} of the default.hbs template --}}
                             {{/foreach}}
                         </ul>
                     </div>
+                    {{#if meta.pagination.total}}
                     <footer class="read-next-card-footer">
-                        <a href="{{#../primary_tag}}{{url}}{{/../primary_tag}}">{{plural meta.pagination.total empty='No posts' singular='% post' plural='See all % posts'}} →</a>
+                        <a href="{{#../primary_tag}}{{url}}{{/../primary_tag}}">{{t "See all posts"}} →</a>
                     </footer>
+                    {{/if}}
                 </article>
                 {{/if}}
             {{/get}}
@@ -194,5 +187,16 @@ $(document).ready(function () {
     update();
 
 });
+</script>
+
+<script>
+    // inject disqus_shortname variable in Ghost
+    if (typeof disqus_shortname !== 'undefined') {
+        (function() {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    }
 </script>
 {{/contentFor}}

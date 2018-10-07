@@ -58,7 +58,12 @@ gulp.task('zip', ['css'], function () {
     return gulp.src([
         '**',
         '!node_modules', '!node_modules/**',
-        '!dist', '!dist/**'
+        '!dist', '!dist/**',
+        '!README.md',
+        '!yarn.lock', '!package-lock.json',
+        '!travis.yml', '!.editorconfig',
+        '!.git', '!.git/**', '!.gitignore',
+        '!.github', '!.github/**'
     ])
         .pipe(zip(filename))
         .pipe(gulp.dest(targetDir));
